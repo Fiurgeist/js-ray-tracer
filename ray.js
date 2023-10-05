@@ -4,7 +4,15 @@ class Ray {
     this.direction = direction;
   }
 
-  trace = (scene) => scene.background;
+  trace = (scene) => {
+    const distances = scene.shapes.map((s) => s.closestDistanceAlongRay(this));
+    const shortestDistance = Math.min.apply(Math, distances);
+    if (shortestDistance === Infinity) {
+      return scene.background;
+    }
+    const nearestShape = scene.shapes[distances.indexOf(shortestDistance)];
+    return nearestShape.color;
+  };
 }
 
 export default Ray;
