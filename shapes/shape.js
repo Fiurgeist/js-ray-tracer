@@ -1,4 +1,5 @@
 import Color from "../color.js";
+import Ray from "../ray.js";
 import { THRESHOLD } from "../settings.js";
 import Vector from "../vector.js";
 
@@ -17,6 +18,7 @@ class Shape {
     let color = Color.Black;
     scene.lights.forEach((light) => {
       const v = Vector.from(point).to(light.position);
+      if (scene.shapes.some((shape) => shape.castsShadowFor(point, v))) return;
       const brightness = normal.dot(v.normalize());
       if (brightness <= 0) return;
       const illumination = light.illuminate(this.appearance, point, brightness);
@@ -24,6 +26,8 @@ class Shape {
     })
     return color;
   }
+  castsShadowFor = (point, lightVector) =>
+    this.closestDistanceAlongRay(new Ray(point, lightVector)) <= lightVector.length();
 }
 
 export default Shape;
