@@ -4,7 +4,7 @@ class Light {
     this.color = color;
   }
   illuminate = (material, point, brightness) =>
-    material.getColorAt(point).multiply(this.color).scale(brightness);
+    material.getDiffuseColorAt(point).multiply(this.color).scale(brightness);
 }
 
 export default Light;

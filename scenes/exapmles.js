@@ -7,6 +7,7 @@ import Light from '../light.js';
 import Box from '../shapes/box.js';
 import Plane from '../shapes/plane.js';
 import Sphere from '../shapes/sphere.js';
+import Finish from '../finish.js';
 
 export const ColoredSpheres = () => {
   const camera = new Camera(new Vector(0, 2, -8), Vector.Z);
@@ -25,14 +26,15 @@ export const ColoredSpheres = () => {
 export const AssortedShapes = () => {
   const camera = new Camera(new Vector(-10, 10, -20), new Vector(0, 4, 0));
   const background = Color.Black;
+  const shiny = new Finish({ shiny: 0.5 })
   const shapes = [
     new Plane(Vector.Y, 0, new Appearance(Color.White)),
-    new Box(new Vector(-2, 0, -2), new Vector(2, 4, 2), new Appearance(Color.Red)),
-    new Sphere(new Vector(6, 0, 2), 2, new Appearance(Color.Magenta)),
-    new Sphere(new Vector(6, 1, -4), 1, new Appearance(Color.Yellow)),
-    new Sphere(new Vector(-2, 2, 4), 2, new Appearance(Color.Green)),
-    new Sphere(new Vector(-4, 4, 10), 4, new Appearance(Color.Blue)),
-    new Sphere(new Vector(-3.2, 1, -1), 1, new Appearance(Color.Cyan)),
+    new Box(new Vector(-2, 0, -2), new Vector(2, 4, 2), new Appearance(Color.Red, shiny)),
+    new Sphere(new Vector(6, 0, 2), 2, new Appearance(Color.Magenta, shiny)),
+    new Sphere(new Vector(6, 1, -4), 1, new Appearance(Color.Yellow, shiny)),
+    new Sphere(new Vector(-2, 2, 4), 2, new Appearance(Color.Green, shiny)),
+    new Sphere(new Vector(-4, 4, 10), 4, new Appearance(Color.Blue, shiny)),
+    new Sphere(new Vector(-3.2, 1, -1), 1, new Appearance(Color.Cyan, shiny)),
   ];
   const lights = [new Light(new Vector(-30, 25, -12), Color.White)];
   return new Scene(camera, background, shapes, lights);

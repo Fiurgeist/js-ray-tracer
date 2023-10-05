@@ -1,4 +1,3 @@
-import Color from "../color.js";
 import Ray from "../ray.js";
 import { THRESHOLD } from "../settings.js";
 import Vector from "../vector.js";
@@ -13,9 +12,10 @@ class Shape {
     return Math.min.apply(Math, intersections);
   }
   getNormalAt = (_point) => { throw("Classes which extend Shape must implement getNormalAt") }
-  getColorAt = (point, scene) => {
+  getColorAt = (point, ray, scene) => {
     const normal = this.getNormalAt(point);
-    let color = Color.Black;
+    let color = this.appearance.getAmbientColorAt(point);
+    const reflex = ray.reflect(normal);
     scene.lights.forEach((light) => {
       const v = Vector.from(point).to(light.position);
       if (scene.shapes.some((shape) => shape.castsShadowFor(point, v))) return;
@@ -23,6 +23,8 @@ class Shape {
       if (brightness <= 0) return;
       const illumination = light.illuminate(this.appearance, point, brightness);
       color = color.add(illumination);
+      const highlight = this.appearance.finish.addHighlight(reflex, light, v);
+      color = color.add(highlight);
     })
     return color;
   }

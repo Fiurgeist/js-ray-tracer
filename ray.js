@@ -13,7 +13,13 @@ class Ray {
     const nearestShape = scene.shapes[distances.indexOf(shortestDistance)];
 
     const point = this.start.add(this.direction.scale(shortestDistance));
-    return nearestShape.getColorAt(point, scene);
+    return nearestShape.getColorAt(point, this, scene);
+  };
+
+  reflect = (normal) => {
+    const normalSquid = normal.squid()
+    if (normalSquid === 0) return this.direction
+    return this.direction.subtract(normal.scale(2 * this.direction.dot(normal) / normalSquid))
   };
 }
 
