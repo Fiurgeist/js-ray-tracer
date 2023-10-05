@@ -22,6 +22,7 @@ class Sphere extends Shape {
       (-b + Math.sqrt(discriminant)) / (2 * a)
     ];
   };
+  getNormalAt = (point) => point.add(this.center.invert()).normalize();
 }
 
 export default Sphere;

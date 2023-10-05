@@ -1,9 +1,12 @@
-class Color {
+import Material from "./material.js";
+
+class Color extends Material {
   #r = 0;
   #g = 0;
   #b = 0;
 
   constructor(r, g, b) {
+    super();
     this.#r = r;
     this.#g = g;
     this.#b = b;
@@ -35,6 +38,8 @@ class Color {
   )
 
   scale = (factor) => new Color(this.r * factor, this.g * factor, this.b * factor);
+
+  getColorAt = () => this;
 }
 
 export default Color;

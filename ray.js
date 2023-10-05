@@ -11,7 +11,9 @@ class Ray {
       return scene.background;
     }
     const nearestShape = scene.shapes[distances.indexOf(shortestDistance)];
-    return nearestShape.color;
+
+    const point = this.start.add(this.direction.scale(shortestDistance));
+    return nearestShape.getColorAt(point, scene);
   };
 }
 

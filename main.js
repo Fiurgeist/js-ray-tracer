@@ -10,4 +10,7 @@ const paintPixel = (x, y, color) => {
   ctx.fillRect(x, y, 1, 1);
 }
 
+const start = Date.now()
 renderer.render(ColoredSpheres(), paintPixel);
+const duration = Date.now() - start;
+document.getElementById('timer').innerHTML = `Rendering took ${duration / 1000}s`;
