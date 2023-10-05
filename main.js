@@ -1,5 +1,5 @@
 import Renderer from './renderer.js';
-import { ColoredSpheres } from './scenes/exapmles.js';
+import { AssortedShapes } from './scenes/exapmles.js';
 
 const canvas = document.getElementById('render');
 const ctx = canvas.getContext('2d');
@@ -10,7 +10,7 @@ const paintPixel = (x, y, color) => {
   ctx.fillRect(x, y, 1, 1);
 }
 
-const start = Date.now()
-renderer.render(ColoredSpheres(), paintPixel);
+const start = Date.now();
+renderer.render(AssortedShapes(), paintPixel);
 const duration = Date.now() - start;
 document.getElementById('timer').innerHTML = `Rendering took ${duration / 1000}s`;

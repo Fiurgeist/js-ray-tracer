@@ -1,9 +1,9 @@
 import Shape from "./shape.js";
-import Vector from "./vector.js";
+import Vector from "../vector.js";
 
 class Sphere extends Shape {
-  constructor(center, radius, color) {
-    super(color);
+  constructor(center, radius, appearance) {
+    super(appearance);
     this.center = center;
     this.radius = radius;
   }

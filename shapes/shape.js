@@ -1,12 +1,12 @@
-import Color from "./color.js";
-import { THRESHOLD } from "./settings.js";
-import Vector from "./vector.js";
+import Color from "../color.js";
+import { THRESHOLD } from "../settings.js";
+import Vector from "../vector.js";
 
 class Shape {
-  constructor(color) {
-    this.color = color;
+  constructor(appearance) {
+    this.appearance = appearance;
   }
-  findIntersections = (_ray) => { throw ("Classes which extend Shape must implement intersect") }
+  findIntersections = (_ray) => { throw("Classes which extend Shape must implement intersect") }
   closestDistanceAlongRay = (ray) => {
     const intersections = this.findIntersections(ray).filter((distance) => distance > THRESHOLD);
     return Math.min.apply(Math, intersections);
