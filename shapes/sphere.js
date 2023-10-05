@@ -10,19 +10,20 @@ class Sphere extends Shape {
 
   findIntersections = (ray) => {
     const os = Vector.from(this.center).to(ray.start);
-    const a = ray.direction.squid();
+    // const a = ray.direction.squid(); ray.direction is normalized ergo squid is 1
     const b = 2 * os.dot(ray.direction);
     const c = os.squid() - this.radius * this.radius;
 
-    const discriminant = b * b - 4 * a * c;
+    const discriminant = b * b - 4 * c;
     if (discriminant < 0) return [];
-    if (discriminant === 0) return [-b / (2 * a)];
+    if (discriminant === 0) return [-b / 2];
     return [
-      (-b - Math.sqrt(discriminant)) / (2 * a),
-      (-b + Math.sqrt(discriminant)) / (2 * a)
+      (-b - Math.sqrt(discriminant)) / 2,
+      (-b + Math.sqrt(discriminant)) / 2
     ];
   };
-  getNormalAt = (point) => point.add(this.center.invert()).normalize();
+
+  getNormalAt = (point) => Vector.from(this.center).to(point).normalize();
 }
 
 export default Sphere;

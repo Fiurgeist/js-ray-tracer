@@ -5,11 +5,14 @@ class Vector {
     this.z = z;
   }
 
+  static O = new Vector(0, 0, 0);
+  static U = new Vector(1, 1, 1);
   static X = new Vector(1, 0, 0);
   static Y = new Vector(0, 1, 0);
   static Z = new Vector(0, 0, 1);
-  static O = new Vector(0, 0, 0);
-  static U = new Vector(1, 1, 1);
+  static XI = new Vector(-1, 0, 0);
+  static YI = new Vector(0, -1, 0);
+  static ZI = new Vector(0, 0, -1);
 
   static from = (origin) => ({ to: (target) => target.subtract(origin) });
 
