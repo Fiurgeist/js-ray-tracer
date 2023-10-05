@@ -1,19 +1,24 @@
+import Color from "./color.js";
+import { MAX_DEPTH } from "./settings.js";
+
 class Ray {
   constructor(start, direction) {
     this.start = start;
-    this.direction = direction;
+    this.direction = direction.normalize();
   }
 
-  trace = (scene) => {
+  trace = (scene, depth = 0) => {
+    if (depth > MAX_DEPTH) return Color.Black;
+
     const distances = scene.shapes.map((s) => s.closestDistanceAlongRay(this));
     const shortestDistance = Math.min.apply(Math, distances);
     if (shortestDistance === Infinity) {
       return scene.background;
     }
-    const nearestShape = scene.shapes[distances.indexOf(shortestDistance)];
 
+    const nearestShape = scene.shapes[distances.indexOf(shortestDistance)];
     const point = this.start.add(this.direction.scale(shortestDistance));
-    return nearestShape.getColorAt(point, this, scene);
+    return nearestShape.getColorAt(point, this, scene, depth + 1);
   };
 
   reflect = (normal) => {

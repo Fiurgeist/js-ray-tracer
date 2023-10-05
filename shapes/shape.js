@@ -12,10 +12,12 @@ class Shape {
     return Math.min.apply(Math, intersections);
   }
   getNormalAt = (_point) => { throw("Classes which extend Shape must implement getNormalAt") }
-  getColorAt = (point, ray, scene) => {
+  getColorAt = (point, ray, scene, depth) => {
     const normal = this.getNormalAt(point);
     let color = this.appearance.getAmbientColorAt(point);
     const reflex = ray.reflect(normal);
+    const reflection = this.appearance.reflect(point, reflex, scene, depth);
+    color = color.add(reflection);
     scene.lights.forEach((light) => {
       const v = Vector.from(point).to(light.position);
       if (scene.shapes.some((shape) => shape.castsShadowFor(point, v))) return;

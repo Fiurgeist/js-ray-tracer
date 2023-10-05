@@ -1,5 +1,6 @@
 import Color from "./color.js";
 import Finish from "./finish.js";
+import Ray from "./ray.js";
 
 class Appearance {
   constructor(material, finish) {
