@@ -25,7 +25,7 @@ export const ColoredSpheres = () => {
 
 export const AssortedShapes = () => {
   const camera = new Camera(new Vector(-5, 7, -15), new Vector(0, 4, 0));
-  const background = Color.Black;
+  const background = Color.Grey;
   const shiny = new Finish({ shiny: 0.5, reflection: 0.5 })
   const shapes = [
     new Plane(Vector.Y, 0, new Appearance(Color.White)),
