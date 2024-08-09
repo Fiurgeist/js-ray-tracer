@@ -1,4 +1,9 @@
 class Vector {
+  /**
+   * @param {number} x
+   * @param {number} y
+   * @param {number} z
+   */
   constructor(x, y, z) {
     this.x = x;
     this.y = y;
@@ -14,24 +19,47 @@ class Vector {
   static YI = new Vector(0, -1, 0);
   static ZI = new Vector(0, 0, -1);
 
-  static from = (origin) => ({ to: (target) => target.subtract(origin) });
-
   length = () => Math.sqrt(this.dot(this));
 
-  dot = (that) => this.x * that.x + this.y * that.y + this.z * that.z;
-  cross = (that) => new Vector(
-    this.y * that.z - this.z * that.y,
-    this.z * that.x - this.x * that.z,
-    this.x * that.y - this.y * that.x,
+  /**
+   * @param {Vector} other
+   * @returns {number}
+   */
+  dot = (other) => this.x * other.x + this.y * other.y + this.z * other.z;
+
+  /**
+   * @param {Vector} other
+   * @returns {Vector} new vector
+   */
+  cross = (other) => new Vector(
+    this.y * other.z - this.z * other.y,
+    this.z * other.x - this.x * other.z,
+    this.x * other.y - this.y * other.x,
   );
-  add = (that) => new Vector(this.x + that.x, this.y + that.y, this.z + that.z);
-  subtract = (that) => new Vector(this.x - that.x, this.y - that.y, this.z - that.z);
+
+  /**
+   * @param {Vector} other
+   * @returns {Vector} new vector
+   */
+  add = (other) => new Vector(this.x + other.x, this.y + other.y, this.z + other.z);
+
+  /**
+   * @param {Vector} other
+   * @returns {Vector} new vector
+   */
+  subtract = (other) => new Vector(this.x - other.x, this.y - other.y, this.z - other.z);
 
   invert = () => new Vector(-this.x, -this.y, -this.z);
+
   normalize = () => {
     const l = this.length();
     return new Vector(this.x / l, this.y / l, this.z / l);
   };
+
+  /**
+   * @param {number} factor
+   * @returns {Vector} new vector
+   */
   scale = (factor) => new Vector(this.x * factor, this.y * factor, this.z * factor);
 
   toString = () => `Vector(${this.x}, ${this.y}, ${this.z})`;

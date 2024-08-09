@@ -3,6 +3,11 @@ class Color {
   #g = 0;
   #b = 0;
 
+  /**
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   */
   constructor(r, g, b) {
     this.#r = r;
     this.#g = g;
@@ -26,14 +31,26 @@ class Color {
   static Magenta = new Color(255, 0, 255);
   static Cyan = new Color(0, 255, 255);
 
-  add = (that) => new Color(this.r + that.r, this.g + that.g, this.b + that.b);
+  /**
+   * @param {Color} other
+   * @returns {Color} new color
+   */
+  add = (other) => new Color(this.r + other.r, this.g + other.g, this.b + other.b);
 
-  multiply = (that) => new Color(
-    Math.floor(this.r * that.r / 255),
-    Math.floor(this.g * that.g / 255),
-    Math.floor(this.b * that.b / 255),
+  /**
+   * @param {Color} other
+   * @returns {Color} new color
+   */
+  multiply = (other) => new Color(
+    Math.floor(this.r * other.r / 255),
+    Math.floor(this.g * other.g / 255),
+    Math.floor(this.b * other.b / 255),
   );
 
+  /**
+   * @param {number} factor
+   * @returns {Color} new color scaled by factor
+   */
   scale = (factor) => new Color(this.r * factor, this.g * factor, this.b * factor);
 }
 

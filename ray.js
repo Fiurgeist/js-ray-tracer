@@ -1,12 +1,23 @@
 import Color from "./color.js";
+import Scene from "./scene.js";
 import { MAX_DEPTH } from "./settings.js";
+import Vector from "./vector.js";
 
 class Ray {
+  /**
+   * @param {Vector} start
+   * @param {Vector} direction
+   */
   constructor(start, direction) {
     this.start = start;
     this.direction = direction.normalize();
   }
 
+  /**
+   * @param {Scene} scene
+   * @param {number=} depth - recursion depth
+   * @returns {Color} traced color
+   */
   trace = (scene, depth = 0) => {
     if (depth > MAX_DEPTH) {
       return Color.Black;
@@ -24,6 +35,10 @@ class Ray {
     return nearestShape.getColorAt(point, this, scene, depth + 1);
   };
 
+  /**
+   * @param {Vector} normal - point hit
+   * @returns {Vector} reflected vector
+   */
   reflect = (normal) => {
     const normalDot = normal.dot(normal);
     if (normalDot === 0) {

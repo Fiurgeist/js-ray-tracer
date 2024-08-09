@@ -1,7 +1,16 @@
 import Shape from "./shape.js";
 import { THRESHOLD } from "../settings.js";
+import Vector from "../vector.js";
+import Material from "../material.js";
+import Ray from "../ray.js";
 
 class Sphere extends Shape {
+  /**
+   *
+   * @param {Vector} center
+   * @param {number} radius
+   * @param {Material} material
+   */
   constructor(center, radius, material) {
     super(material);
 
@@ -9,6 +18,10 @@ class Sphere extends Shape {
     this.radius = radius;
   }
 
+  /**
+   * @param {Ray} ray
+   * @returns {number[]} distances to all intersections
+   */
   findIntersections = (ray) => {
     const os = ray.start.subtract(this.center);
     // const a = ray.direction.dot(ray.direction); ray.direction is normalized ergo a is 1
@@ -25,6 +38,10 @@ class Sphere extends Shape {
     ];
   };
 
+  /**
+   * @param {Vector} point
+   * @returns {Vector} normal vector at given point
+   */
   getNormalAt = (point) => point.subtract(this.center).normalize();
 }
 
