@@ -6,7 +6,7 @@ class Camera {
     this.location = location;
     this.lookAt = lookAt;
 
-    this.direction = Vector.from(this.location).to(this.lookAt).normalize();
+    this.direction = this.lookAt.subtract(this.location).normalize();
     this.right = Vector.Y.cross(this.direction).normalize().scale(width / 2);
     this.up = this.right.cross(this.direction).normalize().scale(-height / 2);
   }
@@ -16,6 +16,7 @@ class Camera {
     const yRay = this.up.scale(y).invert();
     const rayDirection = this.direction.add(xRay).add(yRay);
     const ray = new Ray(this.location, rayDirection);
+
     return ray.trace(scene);
   };
 }

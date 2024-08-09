@@ -9,11 +9,18 @@ class Finish {
   }
 
   addHighlight = (reflex, light, lightVector) => {
-    if (!this.shiny) return Color.Black;
+    if (!this.shiny) {
+      return Color.Black;
+    }
+
     let intensity = reflex.dot(lightVector.normalize());
-    if (intensity <= 0) return Color.Black;
+    if (intensity <= 0) {
+      return Color.Black;
+    }
+
     const exp = 32 * this.shiny * this.shiny;
     intensity = Math.pow(intensity, exp);
+
     return light.color.scale(this.shiny * intensity);
   }
 

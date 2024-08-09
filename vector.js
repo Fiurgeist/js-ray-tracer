@@ -16,8 +16,7 @@ class Vector {
 
   static from = (origin) => ({ to: (target) => target.subtract(origin) });
 
-  squid = () => this.x * this.x + this.y * this.y + this.z * this.z;
-  length = () => Math.sqrt(this.squid());
+  length = () => Math.sqrt(this.dot(this));
 
   dot = (that) => this.x * that.x + this.y * that.y + this.z * that.z;
   cross = (that) => new Vector(
@@ -29,11 +28,11 @@ class Vector {
   subtract = (that) => new Vector(this.x - that.x, this.y - that.y, this.z - that.z);
 
   invert = () => new Vector(-this.x, -this.y, -this.z);
-  scale = (factor) => new Vector(this.x * factor, this.y * factor, this.z * factor);
   normalize = () => {
     const l = this.length();
     return new Vector(this.x / l, this.y / l, this.z / l);
   };
+  scale = (factor) => new Vector(this.x * factor, this.y * factor, this.z * factor);
 
   toString = () => `Vector(${this.x}, ${this.y}, ${this.z})`;
 }

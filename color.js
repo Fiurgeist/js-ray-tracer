@@ -1,23 +1,20 @@
-import Material from "./material.js";
-
-class Color extends Material {
+class Color {
   #r = 0;
   #g = 0;
   #b = 0;
 
   constructor(r, g, b) {
-    super();
     this.#r = r;
     this.#g = g;
     this.#b = b;
   }
 
-  get r() { return this.#r }
-  get g() { return this.#g }
-  get b() { return this.#b }
+  get r() { return this.#r; }
+  get g() { return this.#g; }
+  get b() { return this.#b; }
 
-  get rgba() { return [this.r, this.g,  this.b, 0xff]; }
-  get html() { return `rgb(${this.r}, ${this.g},  ${this.b})`; }
+  get rgba() { return [this.r, this.g, this.b, 255]; }
+  get html() { return `rgb(${this.r}, ${this.g}, ${this.b})`; }
 
   static White = new Color(255, 255, 255);
   static Black = new Color(0, 0, 0);
@@ -29,17 +26,15 @@ class Color extends Material {
   static Magenta = new Color(255, 0, 255);
   static Cyan = new Color(0, 255, 255);
 
-  add = (that) => new Color(this.r + that.r, this.g + that.g, this.b + that.b)
+  add = (that) => new Color(this.r + that.r, this.g + that.g, this.b + that.b);
 
   multiply = (that) => new Color(
-    Math.floor(this.r * that.r / 0xff),
-    Math.floor(this.g * that.g / 0xff),
-    Math.floor(this.b * that.b / 0xff),
-  )
+    Math.floor(this.r * that.r / 255),
+    Math.floor(this.g * that.g / 255),
+    Math.floor(this.b * that.b / 255),
+  );
 
   scale = (factor) => new Color(this.r * factor, this.g * factor, this.b * factor);
-
-  getColorAt = () => this;
 }
 
 export default Color;

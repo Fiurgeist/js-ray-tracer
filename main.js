@@ -13,4 +13,5 @@ const paintPixel = (x, y, color) => {
 const start = Date.now();
 renderer.render(AssortedShapes(), paintPixel);
 const duration = Date.now() - start;
+
 document.getElementById('timer').innerHTML = `Rendering took ${duration / 1000}s`;
